@@ -1,0 +1,9 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@8.20.1
+
+workflows:
+  validate-and-publish:
+    jobs:
+      - orb-tools/lint
