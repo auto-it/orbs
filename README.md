@@ -16,3 +16,10 @@ jobs:
       # ... your build steps here
       - auto/shipit
 ```
+
+## Configuration
+
+The `auto/release` orb can be configured using the following environment variables
+
+- `AUTO_VERSION`: Specifies which version of auto to install. It must be a valid tag which can be found on the [releases page](https://github.com/intuit/auto/releases). It defaults to the latest version.
+- `AUTO_PLATFORM`: Specifies which platform the auto executable will be downloaded for. The options are linux, macos, win. The default is linux.
