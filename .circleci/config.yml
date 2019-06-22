@@ -1,9 +1,11 @@
 version: 2.1
 
 orbs:
-  orb-tools: circleci/orb-tools@8.20.1
+  orb-tools: artsy/orb-tools@0.2.0
 
 workflows:
-  validate-and-publish:
+  publish-orbs:
     jobs:
-      - orb-tools/lint
+      - orb-tools/publish:
+          namespace: auto
+          context: auto-orb-publishing

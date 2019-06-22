@@ -1,3 +1,5 @@
+# Orb Version 0.0.1
+
 # To override the version of auto, set an AUTO_VERSION env var
 version: 2.1
 
@@ -31,6 +33,7 @@ commands:
       arguments:
         type: string
         description: Optional argument string to be passed to auto shipit
+        default: ""
     steps:
       - download-executable
       - run: ./auto shipit << parameters.arguments >> $AUTO_SHIPIT_ARGS
