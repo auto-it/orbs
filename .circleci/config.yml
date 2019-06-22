@@ -1,0 +1,11 @@
+version: 2.1
+
+orbs:
+  orb-tools: artsy/orb-tools@0.2.0
+
+workflows:
+  publish-orbs:
+    jobs:
+      - orb-tools/publish:
+          namespace: auto
+          context: auto-orb-publishing

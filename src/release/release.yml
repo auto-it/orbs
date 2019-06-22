@@ -1,0 +1,39 @@
+# Orb Version 0.0.1
+
+# To override the version of auto, set an AUTO_VERSION env var
+version: 2.1
+
+commands:
+  get-envs:
+    description: Ensures the AUTO_VERSION env var is set for the current job
+    steps:
+      - run:
+          command: |
+            if [ -z "$AUTO_VERSION" ]; then
+              AUTO_VERSION=$(curl -s https://api.github.com/repos/intuit/auto/releases/latest | jq -r .tag_name)
+            fi
+            # Must be linux, macos, or win
+            if [ -z "$AUTO_PLATFORM" ]; then
+              AUTO_PLATFORM=linux
+            fi
+            echo "export AUTO_VERSION=$AUTO_VERSION" >> $BASH_ENV
+            echo "export AUTO_PLATFORM=$AUTO_PLATFORM" >> $BASH_ENV
+
+  download-executable:
+    steps:
+      - get-envs
+      - run:
+          description: Download and unzipping auto binary
+          command: |
+            curl -L "https://github.com/intuit/auto/releases/download/$AUTO_VERSION/auto-$AUTO_PLATFORM.gz" -o auto.gz
+            gzip -d auto.gz
+
+  shipit:
+    parameters:
+      arguments:
+        type: string
+        description: Optional argument string to be passed to auto shipit
+        default: ""
+    steps:
+      - download-executable
+      - run: ./auto shipit << parameters.arguments >> $AUTO_SHIPIT_ARGS
