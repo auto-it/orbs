@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  orb-tools: artsy/orb-tools@0.2.3
+  orb-tools: artsy/orb-tools@0.2.4
 
 workflows:
   publish-orbs:
