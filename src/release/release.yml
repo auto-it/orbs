@@ -26,9 +26,10 @@ commands:
       - run:
           name: Download Auto binary
           command: |
-            curl -L "https://github.com/intuit/auto/releases/download/$AUTO_VERSION/auto-$AUTO_PLATFORM.gz" -o /usr/local/bin/auto.gz
-            gzip -d /usr/local/bin/auto.gz
-            chmod +x /usr/local/bin/auto
+            curl -L "https://github.com/intuit/auto/releases/download/$AUTO_VERSION/auto-$AUTO_PLATFORM.gz" -o /tmp/auto.gz
+            gzip -d /tmp/auto.gz
+            chmod +x /tmp/auto
+            sudo mv /tmp/auto /usr/local/bin/auto
 
   shipit:
     parameters:
