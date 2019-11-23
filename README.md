@@ -8,7 +8,7 @@ A [circleci orb](https://circleci.com/docs/2.0/orb-intro/) that makes it easy to
 version: 2.1
 
 orbs:
-  auto: auto/release@1.0.0
+  auto: auto/release@0.0.5
 
 jobs:
   build:
