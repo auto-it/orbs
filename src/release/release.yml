@@ -53,4 +53,4 @@ commands:
       - download-executable
       - run:
           name: auto canary
-          command: auto canary << parameters.arguments >> $AUTO_CANARY_ARGS
+          command: [[ -z "${GH_TOKEN}" ]] && echo "GH_TOKEN environment variable not set, skipping canary deploy" || auto canary << parameters.arguments >> $AUTO_CANARY_ARGS
