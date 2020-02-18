@@ -1,4 +1,4 @@
-# Orb Version 0.0.5
+# Orb Version 0.0.6
 
 # To override the version of auto, set an AUTO_VERSION env var
 version: 2.1
@@ -42,3 +42,15 @@ commands:
       - run:
           name: auto shipit
           command: auto shipit << parameters.arguments >> $AUTO_SHIPIT_ARGS
+
+  canary:
+    parameters:
+      arguments:
+        type: string
+        description: Optional argument string to be passed to auto canary
+        default: ""
+    steps:
+      - download-executable
+      - run:
+          name: auto canary
+          command: auto canary << parameters.arguments >> $AUTO_CANARY_ARGS
