@@ -53,10 +53,10 @@ commands:
       - run:
           name: Check for GH_TOKEN
           command: |
-          if [[ -z "${GH_TOKEN}" ]]; then 
-            echo "GH_TOKEN environment variable not set, skipping canary deploy" 
-            circleci-agent step halt
-          fi
+            if [[ -z "${GH_TOKEN}" ]]; then 
+              echo "GH_TOKEN environment variable not set, skipping canary deploy" 
+              circleci-agent step halt
+            fi
       - download-executable
       - run:
           name: auto canary
