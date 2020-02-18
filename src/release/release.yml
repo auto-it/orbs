@@ -1,4 +1,4 @@
-# Orb Version 0.0.5
+# Orb Version 0.1.0
 
 # To override the version of auto, set an AUTO_VERSION env var
 version: 2.1
@@ -42,3 +42,22 @@ commands:
       - run:
           name: auto shipit
           command: auto shipit << parameters.arguments >> $AUTO_SHIPIT_ARGS
+
+  canary:
+    parameters:
+      arguments:
+        type: string
+        description: Optional argument string to be passed to auto canary
+        default: ""
+    steps:
+      - run:
+          name: Check for GH_TOKEN
+          command: |
+            if [[ -z "${GH_TOKEN}" ]]; then 
+              echo "GH_TOKEN environment variable not set, skipping canary deploy" 
+              circleci-agent step halt
+            fi
+      - download-executable
+      - run:
+          name: auto canary
+          command: auto canary << parameters.arguments >> $AUTO_CANARY_ARGS
