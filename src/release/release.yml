@@ -61,7 +61,7 @@ commands:
       - run:
           name: Skip if no canary label
           command: |
-            if $(auto label --pr "${CIRCLE_PULL_REQUEST##*/}" | grep 'canary'); then
+            if auto label --pr "${CIRCLE_PULL_REQUEST##*/}" | grep 'canary'; then
               echo "canary label found, starting canary deployment!"
             else
               echo "Skipping, canary label isn't present."
