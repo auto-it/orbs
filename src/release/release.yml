@@ -1,4 +1,4 @@
-# Orb Version 0.1.0
+# Orb Version 0.2.0
 
 # To override the version of auto, set an AUTO_VERSION env var
 version: 2.1
@@ -58,6 +58,13 @@ commands:
               circleci-agent step halt
             fi
       - download-executable
+      - run:
+          name: Skip if no canary label
+          command: |
+            if [ $(auto label --pr "${CIRCLE_PULL_REQUEST##*/}" | grep -v 'canary') ]; then
+              echo "Skipping, canary label isn't present."
+              circleci-agent step halt
+            fi
       - run:
           name: auto canary
           command: auto canary << parameters.arguments >> $AUTO_CANARY_ARGS
